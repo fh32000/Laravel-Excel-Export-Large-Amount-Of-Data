@@ -23,7 +23,23 @@ class UserController extends Controller
     }
 
 
+    /**
+     * download a Excel Export for all users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $user = User::inRandomOrder()->first();
+        $data = Carbon::now()->format('Y-m-d H:i:s.u');
+        $export_file_name = "user-$user->id-users-export-at-$data.xlsx";
 
+        (new UsersExport)->queue($export_file_name)->allOnQueue('exports');
+
+        return back()->withSuccess("$export_file_name Export started!");
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -9,6 +9,8 @@
 </head>
 <body>
 <div class="container">
+    <a href="{{route('users.export')}}" class="btn btn-success btn-sm" role="button"
+       aria-pressed="true">Export Excel</a><br><br>
     <table class="table table-striped">
         <thead>
         <tr>
