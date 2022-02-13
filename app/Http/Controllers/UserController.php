@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
 use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
