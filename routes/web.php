@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('users');
 });
 
-Route::get('users/', [UserController::class, 'index']);
+Route::get('users/', [UserController::class, 'index'])->name('users');
+Route::get('exports/', [UserController::class, 'exports'])->name('exports');
 Route::get('users/export/', [UserController::class, 'export'])->name('users.export');
+Route::get('users/export/download/{export_id}', [UserController::class, 'download'])->name('users.export.download');
