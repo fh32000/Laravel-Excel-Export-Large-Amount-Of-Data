@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
-use App\User;
+use App\Jobs\UpdateExportStatusToCompleted;
+use App\Models\Export;
 use App\Models\User;
 use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -33,12 +35,41 @@ class UserController extends Controller
     {
         $user = User::inRandomOrder()->first();
         $data = Carbon::now()->format('Y-m-d H:i:s.u');
-        $export_file_name = "user-$user->id-users-export-at-$data.xlsx";
+        $export_file_name = "user-$user->id-export-users-at-$data.xlsx";
+        $export= $user->exports()->create([
+            'path'=>$export_file_name,
+        ]);
 
-        (new UsersExport)->queue($export_file_name)->allOnQueue('exports');
+        (new UsersExport($export))->queue($export_file_name)->allOnQueue('exports')->chain([
+            new UpdateExportStatusToCompleted($export),
+        ]);
 
         return back()->withSuccess("$export_file_name Export started!");
 
+
+    }
+
+    /**
+     * Display a listing of the exports resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exports()
+    {
+        $exports = Export::paginate($request->per_page ?? 10);
+
+        return view('pages.exports.index', compact('exports'));
+
+    }
+    /**
+     * download export file.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function download($export_id)
+    {
+        $export = Export::whereId($export_id)->first();
+       return Storage::download($export->path);
 
     }
     /**
