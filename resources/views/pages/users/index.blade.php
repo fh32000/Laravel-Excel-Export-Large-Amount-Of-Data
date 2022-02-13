@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,9 +8,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 </head>
 <body>
-<div class="container">
+<div class="container m-lg-3" >
+
     <a href="{{route('users.export')}}" class="btn btn-success btn-sm" role="button"
-       aria-pressed="true">Export Excel</a><br><br>
+       aria-pressed="true">Export Excel</a>
+    <a href="{{route('exports')}}" class="btn btn-success btn-sm" role="button"
+       aria-pressed="true">GO TO Exports</a>
     <table class="table table-striped">
         <thead>
         <tr>
