@@ -1,9 +1,9 @@
-## Laravel Project to extract big data to one file exele using batcuts job
+## Laravel Project to extract big data to one file exele using appended queue job
 
 tool used in project 
-- Laravel 8.
+- Laravel 7.
 - MySql 8.
-- PHP 8.0.* or 7.3*.
+- PHP 8.0.* or 7.3.*
 
 
 ### Step to run the project 
