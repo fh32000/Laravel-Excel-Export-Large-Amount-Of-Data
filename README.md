@@ -54,3 +54,9 @@ http://localhost:8000/users
  ```
 - after the click in Export Excel job will run code for (10 -30 min) thin  Excel file will generate in storage/app 
 
+***
+==============================
+
+#### New Feature:- download exported file
+
+You Can now download exported file from localhost:8000/exports
