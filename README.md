@@ -23,6 +23,10 @@ DB_DATABASE=laravel-exel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+- Generate your application encryption key using  
+ ```bash
+$ php artisan key:generate
+ ```
 
 - run optimize  
  ```bash
@@ -45,8 +49,9 @@ DB_PASSWORD=
 
 - run queue    
  ```bash
-$ php artisan queue:restart 
+$ php artisan queue:work 
  ```
+
 
 - open browser  and run 
  ```bash
